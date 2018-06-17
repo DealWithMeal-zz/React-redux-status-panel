@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Home from './containers/Home';
+import Datadoghq from './containers/datadoghq';
 import { refreshAPIStatus } from './actions/index';
 
 class App extends React.Component {
@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <main className="container">
-        <Home refreshAPI={this.props.onRefreshAPIClick} apiStatus={this.props.apiStatus}/>
+        <Datadoghq refreshAPI={this.props.onRefreshAPIClick} apiStatus={this.props.services[0]}/>
       </main>
     )
   }
@@ -19,14 +19,14 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        apiStatus : state.rootReducer.status,
+        services : state.rootReducer.services,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         onRefreshAPIClick: (response) => {
-          console.log('app.jsx refreshAPI : ' + response);
+          console.log('app.jsx refreshAPI object: ' + JSON.stringify(response));
           dispatch(refreshAPIStatus(response));
         }
     };
