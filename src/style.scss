@@ -10,9 +10,18 @@
   height: auto;
   margin: 25px;
   padding: 25px;
-  background-color: aliceblue;
+  /* yellow = non operational, needs attention */
+  background-color: yellow;
   border: 1px solid gray;
   font-size: 16px;
+
+  &[data-status="fetching"] {
+    background-color: lightgrey;
+  }
+
+  &[data-status="operational"] {
+    background-color: lightgreen;
+  }
 }
 
 .status-panel__name {

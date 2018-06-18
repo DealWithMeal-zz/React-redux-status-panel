@@ -1,4 +1,4 @@
-import { FETCH_API_DATADOG } from '../actions/datadogActions';
+import { DATADOG_FETCH_API } from '../actions/datadogActions';
 
 const defaultState = {
   'services': [
@@ -7,11 +7,11 @@ const defaultState = {
       'components': [
         {
           'name': 'Alerting Engine',
-          'status': ''
+          'status': 'fetching'
         },
         {
           'name': 'Event Pipeline',
-          'status': ''
+          'status': 'fetching'
         }
       ]
     }
@@ -22,7 +22,7 @@ const rootReducer = (state = defaultState, action) => {
   console.log('reducer received action : ' + action.type);
 
   switch (action.type) {
-    case FETCH_API_DATADOG:
+    case DATADOG_FETCH_API:
       var updatedComponents = action.response.data.components.filter(component => ['Alerting Engine', 'Event Pipeline'].includes(component.name)).map(comp => ({
         'name': comp.name,
         'status': comp.status

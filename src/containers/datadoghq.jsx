@@ -11,14 +11,15 @@ class Datadoghq extends React.Component {
   render() {
     return (
       <div>
-        <div className="status-panel">
-          <div className="status-panel__name">{this.props.serviceStatus.components[0].name}</div>
-          <div className="status-panel__status">{'Current status: ' + this.props.serviceStatus.components[0].status}</div>
-        </div>
-        <div className="status-panel">
-          <div className="status-panel__name">{this.props.serviceStatus.components[1].name}</div>
-          <div className="status-panel__status">{'Current status: ' + this.props.serviceStatus.components[1].status}</div>
-        </div>
+        {
+          this.props.serviceStatus.components.map(function(item) { return (
+            <div className="status-panel" key={item.name} data-status={item.status}>
+              <div className="status-panel__name">{item.name}</div>
+              <div className="status-panel__status">{'Current status: ' + item.status}</div>
+            </div>
+            )
+          })
+        }
       </div>
     );
   }
