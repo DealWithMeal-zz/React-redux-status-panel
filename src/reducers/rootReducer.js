@@ -1,6 +1,6 @@
 import { DATADOG_FETCH_API } from '../actions/datadogActions';
 
-//add services and components here in same manner
+//add new services and components here in same manner
 const defaultState = {
   'services': [
     {
