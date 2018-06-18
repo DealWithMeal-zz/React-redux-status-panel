@@ -1,6 +1,6 @@
 {
   "name": "React-redux-status-panel",
-  "version": "1.0",
+  "version": "2.0.1",
   "description": "React redux status panel",
   "main": "index.js",
   "author": "Ilia Bazanov",
