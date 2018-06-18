@@ -1,38 +1,35 @@
 import React from 'react';
-import DatagodhqComponent from './datagodhqComponent';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { fetchAPIDatadog } from "../actions/datadogActions";
 
 class Datadoghq extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  dispatchAPIUpdate(data) {
-    debugger;
-    console.log('datadoghq.jsx');
-    this.props.dispatchUpdate({});
+  componentDidMount() {
+    this.props.fetchAPIDatadog();
   }
 
   render() {
     return (
       <div>
-        <DatagodhqComponent
-          onClick={this.dispatchAPIUpdate}
-          apiUrl={this.props.apiStatus.API}
-          component={this.props.apiStatus.components[0]}>
-          Alert Engine
-        </DatagodhqComponent>
-
-        <br/><br/>
-
-        <DatagodhqComponent
-          onClick={this.dispatchAPIUpdate}
-          apiUrl={this.props.apiStatus.API}
-          component={this.props.apiStatus.components[1]}>
-          Event Pipeline
-        </DatagodhqComponent>
+        <div className="status-panel">
+          <div className="status-panel__name">{this.props.serviceStatus.components[0].keyValue}</div>
+          <div className="status-panel__status">{'Current status: ' + this.props.serviceStatus.components[0].status}</div>
+        </div>
+        <div className="status-panel">
+          <div className="status-panel__name">{this.props.serviceStatus.components[1].keyValue}</div>
+          <div className="status-panel__status">{'Current status: ' + this.props.serviceStatus.components[1].status}</div>
+        </div>
       </div>
-    )
+    );
   }
 }
 
-export default Datadoghq;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchAPIDatadog }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Datadoghq);

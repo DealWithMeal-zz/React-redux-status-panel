@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Datadoghq from './containers/datadoghq';
-import { refreshAPIStatus } from './actions/index';
+import { fetchAPIDatadog } from './actions/datadogActions';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <main className="container">
-        <Datadoghq dispatchUpdate={this.props.updateAPIStatus} apiStatus={this.props.services[0]}/>
+        <Datadoghq serviceStatus={this.props.services[0]}/>
       </main>
     )
   }
@@ -25,9 +25,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        updateAPIStatus: (response) => {
-          console.log('app.jsx refreshAPI object: ' + JSON.stringify(response));
-          dispatch(refreshAPIStatus(response));
+        fetchAPIDatadog: () => {
+          console.log('app.jsx fetchAPIDatadog');
+          dispatch(fetchAPIDatadog());
         }
     };
 }
