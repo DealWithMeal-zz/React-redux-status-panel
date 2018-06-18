@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <main className="container">
-        <Datadoghq refreshAPI={this.props.onRefreshAPIClick} apiStatus={this.props.services[0]}/>
+        <Datadoghq dispatchUpdate={this.props.updateAPIStatus} apiStatus={this.props.services[0]}/>
       </main>
     )
   }
@@ -25,7 +25,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        onRefreshAPIClick: (response) => {
+        updateAPIStatus: (response) => {
           console.log('app.jsx refreshAPI object: ' + JSON.stringify(response));
           dispatch(refreshAPIStatus(response));
         }
