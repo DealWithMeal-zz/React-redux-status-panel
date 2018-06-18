@@ -8,10 +8,6 @@ class Datadoghq extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.fetchAPIDatadog();
-  }
-
   render() {
     return (
       <div>

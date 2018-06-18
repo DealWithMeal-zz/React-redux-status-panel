@@ -23,26 +23,22 @@ const rootReducer = (state = defaultState, action) => {
 
   switch (action.type) {
     case FETCH_API_DATADOG:
-      action.payload.then(function (response) {
-        var updatedComponents = response.data.components.filter(component => ['Alerting Engine', 'Event Pipeline'].includes(component.name)).map(comp => ({
-          'name': comp.name,
-          'status': comp.status
-        }))
+      var updatedComponents = action.response.data.components.filter(component => ['Alerting Engine', 'Event Pipeline'].includes(component.name)).map(comp => ({
+        'name': comp.name,
+        'status': comp.status
+      }))
 
-        debugger;
-
-        return {
-          ...state,
-          'services': [
-            {
-              name: 'datadoghq',
-              components: [
-                ...updatedComponents
-              ]
-            }
-          ]
-        }
-      })
+      return {
+        ...state,
+        'services': [
+          {
+            name: 'datadoghq',
+            components: [
+              ...updatedComponents
+            ]
+          }
+        ]
+      }
     default:
       return defaultState
   }

@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from "axios";
 import Datadoghq from './containers/datadoghq';
-import { fetchAPIDatadog } from './actions/datadogActions';
+import { fetchAPIDatadog, API_URL } from './actions/datadogActions';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.fetchDatadog();
   }
 
   render() {
@@ -25,9 +30,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchAPIDatadog: () => {
+        fetchDatadog: () => {
           console.log('app.jsx fetchAPIDatadog');
-          dispatch(fetchAPIDatadog());
+          axios.get(API_URL).then(function(response) {
+            dispatch(fetchAPIDatadog(response));
+          });
         }
     };
 }
