@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "Ilia Bazanov",
   "license": "MIT",
-  "homepage": "https://dealwithmeal.github.io/React-redux-status-panel/",
+  "homepage": "https://DealWithMeal.github.io/React-redux-status-panel",
   "repository": {
     "type": "git",
     "url": "git://github.com/DealWithMeal/React-redux-status-panel.git"
