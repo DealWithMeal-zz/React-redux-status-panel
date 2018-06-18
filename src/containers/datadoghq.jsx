@@ -8,9 +8,11 @@ class Datadoghq extends React.Component {
     super(props);
   }
 
+  //props.serviceStatus should contain array of components
   render() {
     return (
-      <div>
+      <div className="status-component">
+      <h3>Status of selected services from Datadoghq:</h3>
         {
           this.props.serviceStatus.components.map(function(item) { return (
             <div className="status-panel" key={item.name} data-status={item.status}>
@@ -25,8 +27,4 @@ class Datadoghq extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchAPIDatadog }, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(Datadoghq);
+export default Datadoghq;

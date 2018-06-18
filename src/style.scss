@@ -1,14 +1,27 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 .container {
-    margin: auto;
+    margin: 50px auto 0 auto;
     text-align: center;
-    max-width: 900px;
+}
+
+.status-component {
+  margin: 25px 0;
+  display: inline-block;
+  border: 1px solid lightgrey;
+
+  h3 {
+    text-align: left;
+    margin: 25px;
+  }
 }
 
 .status-panel {
-  display: inline-block;
-  width: 300px;
   height: auto;
-  margin: 25px;
+  margin: 0 25px 25px 25px;
   padding: 25px;
   /* yellow = non operational, needs attention */
   background-color: yellow;
@@ -22,9 +35,17 @@
   &[data-status="operational"] {
     background-color: lightgreen;
   }
+
+  @media (min-width: 768px) {
+    max-width: 300px;
+  }
 }
 
 .status-panel__name {
   font-weight: bold;
   margin-bottom: 15px;
+}
+
+.status-panel__status {
+
 }
