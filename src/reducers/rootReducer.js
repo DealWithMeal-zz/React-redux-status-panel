@@ -4,17 +4,13 @@ const defaultState = {
   'services': [
     {
       'name': 'datadoghq',
-      'API': 'https://status.datadoghq.com/history.json',
-      'statusField': 'status',
       'components': [
         {
-          'keyField': 'name',
-          'keyValue': 'Alerting Engine',
+          'name': 'Alerting Engine',
           'status': ''
         },
         {
-          'keyField': 'name',
-          'keyValue': 'Event Pipeline',
+          'name': 'Event Pipeline',
           'status': ''
         }
       ]
@@ -28,24 +24,23 @@ const rootReducer = (state = defaultState, action) => {
   switch (action.type) {
     case FETCH_API_DATADOG:
       action.payload.then(function (response) {
-        //create a copy of default state
-        var updatedData = {'services': [{'components': []}]};
-        updatedData.services[0].components.push(...JSON.parse(JSON.stringify(defaultState.services[0].components)));
-        //for each component defined in the default state, copy fetched status
-        response.data.components.forEach((responseComponent) => {
-            updatedData.services[0].components.forEach((updatedComponent) => {
-                //if component[keyField] === keyValue
-                if(responseComponent[updatedComponent.keyField] === updatedComponent.keyValue) {
-                  updatedComponent.status = (' ' + responseComponent[defaultState.services[0].statusField]).slice(1);
-                }
-            });
-        });
+        var updatedComponents = response.data.components.filter(component => ['Alerting Engine', 'Event Pipeline'].includes(component.name)).map(comp => ({
+          'name': comp.name,
+          'status': comp.status
+        }))
 
         debugger;
 
         return {
           ...state,
-          ...updatedData
+          'services': [
+            {
+              name: 'datadoghq',
+              components: [
+                ...updatedComponents
+              ]
+            }
+          ]
         }
       })
     default:
