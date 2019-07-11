@@ -1,5 +1,7 @@
 # React+Redux status panel
 
+https://dealwithmeal.github.io/React-redux-status-panel/
+
 React+redux app that lists different status pages and shows service statuses from those pages.
 
 It's simple and easy to extend. Supports multiple components per one service.
